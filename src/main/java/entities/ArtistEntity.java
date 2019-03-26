@@ -73,4 +73,14 @@ public class ArtistEntity {
         result = 31 * result + (instrument != null ? instrument.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "ArtistEntity{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", instrument='" + instrument + '\'' +
+                '}';
+    }
 }

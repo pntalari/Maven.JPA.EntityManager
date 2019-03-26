@@ -10,6 +10,7 @@
         </datasource-mapping>
         <naming-strategy-map>
           <unit-entry name="Entities" />
+          <unit-entry name="jpa-Entity" />
         </naming-strategy-map>
         <deploymentDescriptor name="persistence.xml" url="file://$MODULE_DIR$/src/main/resources/META-INF/persistence.xml" />
       </configuration>
