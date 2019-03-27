@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "cd", schema = "jpaManager", catalog = "")
+@Table(name = "CdEn", schema = "jpaManager", catalog = "")
 public class CdEntity {
     private int id;
     private String title;

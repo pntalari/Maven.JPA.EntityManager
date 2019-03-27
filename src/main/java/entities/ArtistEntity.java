@@ -1,5 +1,6 @@
 package entities;
 
+import javax.management.relation.Role;
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -13,6 +14,13 @@ public class ArtistEntity {
     private String instrument;
 
     public ArtistEntity() {
+    }
+
+    public ArtistEntity(int id, String firstName, String lastName, String instrument) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.instrument = instrument;
     }
 
     public ArtistEntity(int id, String firstName, String lastName, String instrument, Set<CdEntity> cDs) {
@@ -63,10 +71,10 @@ public class ArtistEntity {
         this.instrument = instrument;
     }
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "ArtistCdEntity",
-    joinColumns = @JoinColumn(name = "id", referencedColumnName = "id"),
-    inverseJoinColumns = @JoinColumn(name = "cdId", referencedColumnName = "id"))
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER,targetEntity = CdEntity.class)
+    @JoinTable(name = "artist_cd",
+    joinColumns = @JoinColumn(name = "artist_id", referencedColumnName = "id"),
+    inverseJoinColumns = @JoinColumn(name = "cd_id", referencedColumnName = "id"))
     private Set<CdEntity> cDs = new HashSet<>();
 
     @Override
