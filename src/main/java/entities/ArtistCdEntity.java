@@ -7,6 +7,7 @@ import javax.persistence.*;
 public class ArtistCdEntity {
     private Integer cdId;
     private Integer artistId;
+    private String id;
 
     @Basic
     @Column(name = "cd_id")
@@ -48,9 +49,8 @@ public class ArtistCdEntity {
         return result;
     }
 
-    private String id;
-
     @Id
+    @Column(name = "id")
     public String getId() {
         return id;
     }

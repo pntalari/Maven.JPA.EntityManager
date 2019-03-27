@@ -6,13 +6,23 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "CdEn", schema = "jpaManager", catalog = "")
+@Table(name = "cd", schema = "jpaManager", catalog = "")
 public class CdEntity {
+    @Id
+    @Column(name = "id")
     private int id;
+    @Basic
+    @Column(name = "title")
     private String title;
-    private String desc;
+    @Basic
+    @Column(name = "year")
     private Integer year;
+    @Basic
+    @Column(name = "price")
     private Float price;
+    @Basic
+    @Column(name = "description")
+    private String description;
 
     public CdEntity() {
 
@@ -21,14 +31,16 @@ public class CdEntity {
     public CdEntity(int id, String title, String desc, Integer year, Float price, Set<ArtistEntity> artists) {
         this.id = id;
         this.title = title;
-        this.desc = desc;
+        this.description = desc;
         this.year = year;
         this.price = price;
         this.artists = artists;
     }
 
-    @Id
-    @Column(name = "id")
+    @ManyToMany(mappedBy = "cDs")
+    private Set<ArtistEntity> artists = new HashSet<>();
+
+
     public int getId() {
         return id;
     }
@@ -37,8 +49,7 @@ public class CdEntity {
         this.id = cd_id;
     }
 
-    @Basic
-    @Column(name = "title")
+
     public String getTitle() {
         return title;
     }
@@ -47,18 +58,7 @@ public class CdEntity {
         this.title = title;
     }
 
-    @Basic
-    @Column(name = "desc")
-    public String getDesc() {
-        return desc;
-    }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
-    }
-
-    @Basic
-    @Column(name = "year")
     public Integer getYear() {
         return year;
     }
@@ -67,11 +67,11 @@ public class CdEntity {
         this.year = year;
     }
 
-    @Basic
-    @Column(name = "price")
+
     public Float getPrice() {
         return price;
     }
+
 
     public void setPrice(Float price) {
         this.price = price;
@@ -85,9 +85,6 @@ public class CdEntity {
         this.artists = artists;
     }
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Set<ArtistEntity> artists = new HashSet<>();
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -97,7 +94,8 @@ public class CdEntity {
 
         if (id != cdEntity.id) return false;
         if (title != null ? !title.equals(cdEntity.title) : cdEntity.title != null) return false;
-        if (desc != null ? !desc.equals(cdEntity.desc) : cdEntity.desc != null) return false;
+        if (description != null ? !description.equals(cdEntity.description) : cdEntity.description != null)
+            return false;
         if (year != null ? !year.equals(cdEntity.year) : cdEntity.year != null) return false;
         if (artists != null ? !artists.equals(cdEntity.artists) : cdEntity.artists != null) return false;
         if (price != null ? !price.equals(cdEntity.price) : cdEntity.price != null) return false;
@@ -109,10 +107,31 @@ public class CdEntity {
     public int hashCode() {
         int result = id;
         result = 31 * result + (title != null ? title.hashCode() : 0);
-        result = 31 * result + (desc != null ? desc.hashCode() : 0);
+        result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + (year != null ? year.hashCode() : 0);
         result = 31 * result + (artists != null ? artists.hashCode() : 0);
         result = 31 * result + (price != null ? price.hashCode() : 0);
         return result;
+    }
+
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    @Override
+    public String toString() {
+        return "CdEntity{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", year=" + year +
+                ", price=" + price +
+                ", description='" + description + '\'' +
+                ", artists=" + artists +
+                '}';
     }
 }

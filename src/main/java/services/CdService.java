@@ -20,7 +20,7 @@ public class CdService {
             CdEntity cdEntity = new CdEntity();
 
             cdEntity.setId(id);
-            cdEntity.setDesc(description);
+            cdEntity.setDescription(description);
             cdEntity.setPrice(price);
             cdEntity.setTitle(title);
             cdEntity.setArtists(artists);

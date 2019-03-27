@@ -8,9 +8,17 @@ import java.util.Set;
 @Entity
 @Table(name = "artist", schema = "jpaManager", catalog = "")
 public class ArtistEntity {
+    @Id
+    @Column(name = "id")
     private int id;
+    @Basic
+    @Column(name = "first_name")
     private String firstName;
+    @Basic
+    @Column(name = "last_name")
     private String lastName;
+    @Basic
+    @Column(name = "instrument")
     private String instrument;
 
     public ArtistEntity() {
@@ -31,8 +39,13 @@ public class ArtistEntity {
         this.cDs = cDs;
     }
 
-    @Id
-    @Column(name = "id")
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER,targetEntity = CdEntity.class)
+    @JoinTable(name = "artist_cd",
+            joinColumns = @JoinColumn(name = "artist_id"),
+            inverseJoinColumns = @JoinColumn(name = "cd_id"))
+    public Set<CdEntity> cDs = new HashSet<>();
+
+
     public int getId() {
         return id;
     }
@@ -41,8 +54,7 @@ public class ArtistEntity {
         this.id = id;
     }
 
-    @Basic
-    @Column(name = "first_name")
+
     public String getFirstName() {
         return firstName;
     }
@@ -51,8 +63,7 @@ public class ArtistEntity {
         this.firstName = firstName;
     }
 
-    @Basic
-    @Column(name = "last_name")
+
     public String getLastName() {
         return lastName;
     }
@@ -61,8 +72,7 @@ public class ArtistEntity {
         this.lastName = lastName;
     }
 
-    @Basic
-    @Column(name = "instrument")
+
     public String getInstrument() {
         return instrument;
     }
@@ -70,12 +80,6 @@ public class ArtistEntity {
     public void setInstrument(String instrument) {
         this.instrument = instrument;
     }
-
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER,targetEntity = CdEntity.class)
-    @JoinTable(name = "artist_cd",
-    joinColumns = @JoinColumn(name = "artist_id", referencedColumnName = "id"),
-    inverseJoinColumns = @JoinColumn(name = "cd_id", referencedColumnName = "id"))
-    private Set<CdEntity> cDs = new HashSet<>();
 
     @Override
     public boolean equals(Object o) {
@@ -99,6 +103,14 @@ public class ArtistEntity {
         result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
         result = 31 * result + (instrument != null ? instrument.hashCode() : 0);
         return result;
+    }
+
+    public Set<CdEntity> getcDs() {
+        return cDs;
+    }
+
+    public void setcDs(Set<CdEntity> cDs) {
+        this.cDs = cDs;
     }
 
     @Override
