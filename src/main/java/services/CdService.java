@@ -43,9 +43,24 @@ public class CdService {
         Query query = entityManager.createQuery("Select e from CdEntity e");
         return query.getResultList();
     }
-//    update()
-//    create()
-//    delete()
 
+    /** Update CD data **/
+    public CdEntity updateCdTitle(CdEntity cd, String title) {
+        CdEntity cdEntity = entityManager.merge(cd);
+
+        entityTransaction.begin();
+        cdEntity.setTitle(title);
+        entityTransaction.commit();
+
+        return cdEntity;
+    }
+
+    /** Delete a CD **/
+    public void deleteCd(CdEntity cd){
+        CdEntity cdToBeDeleted = entityManager.merge(cd);
+        entityTransaction.begin();
+        entityManager.remove(cdToBeDeleted);
+        entityTransaction.commit();
+    }
 
 }

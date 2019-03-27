@@ -13,13 +13,15 @@ public class MainRunner {
         ArtistEntity artistEntity = new ArtistEntity();
         Set<ArtistEntity> artistSet1 = new HashSet<>();
 
+        CdEntity cdEntity = new CdEntity();
+
 
         /**Create Artist**/
 //         artistEntity = artistService.createArtist(6,"Elton", "John","Piano");
 //         artistService.createArtist(2,"Britney", "Spears","Base");
 
         artistSet1.add(new ArtistEntity(8, "Joe", "Arnone", "Keyboard"));
-        artistSet1.add(new ArtistEntity(9, "Jidh", "Mohan", "Chelo"));
+//        artistSet1.add(new ArtistEntity(9, "Jidh", "Mohan", "Chelo"));
 //
 //         System.out.println("Artist Persisted: " + artistEntity.getId());
 
@@ -44,11 +46,26 @@ public class MainRunner {
 
         /** CD Entity Service **/
         CdService cdService = new CdService();
-        CdEntity cds = new CdEntity();
         //cdService.createCD(8, "Desert Rose", 150, "Rose", 2000,artistSet1);
 
-        cds = cdService.findCdById(1);
-        System.out.println("Finding CD: " +cds);
+        /** find Cd by Id **/
+        cdEntity = cdService.findCdById(4);
+        System.out.println("Finding CD: " +cdEntity);
+
+        /** find all artists **/
+        List<CdEntity> cdEntities = new ArrayList<CdEntity>();
+        cdEntities = cdService.findAllCds();
+        for (int i = 0; i <cdEntities.size() ; i++) {
+            System.out.println("CDs persisted: " +cdEntities.get(i));
+        }
+
+        /** Update CD data **/
+      //  cdEntity = cdService.updateCdTitle(cdEntity,"Festival Music");
+      //  System.out.println("Updated CD: " +cdEntity);
+
+        /** Delete a CD **/
+        cdService.deleteCd(cdEntity);
+        System.out.println("Deleted Cd: " + cdEntity);
 
     }
 }
