@@ -14,7 +14,6 @@ public class ArtistEntity {
     @GeneratedValue(strategy=GenerationType.AUTO)
     @Column(name = "id")
     private Long id;
-
     @Basic
     @Column(name = "first_name")
     private String firstName;

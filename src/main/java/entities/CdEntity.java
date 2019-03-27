@@ -13,7 +13,6 @@ public class CdEntity {
     @GeneratedValue(strategy=GenerationType.AUTO)
     @Column(name = "id")
     private Long id;
-
     @Basic
     @Column(name = "title")
     private String title;
