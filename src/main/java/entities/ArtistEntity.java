@@ -1,6 +1,8 @@
 package entities;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "artist", schema = "jpaManager", catalog = "")
@@ -49,6 +51,12 @@ public class ArtistEntity {
     public void setInstrument(String instrument) {
         this.instrument = instrument;
     }
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "ArtistCdEntity",
+    joinColumns = @JoinColumn(name = "id", referencedColumnName = "id"),
+    inverseJoinColumns = @JoinColumn(name = "cd_id", referencedColumnName = "cd_id"))
+    private Set<CdEntity> cDs = new HashSet<CdEntity>();
 
     @Override
     public boolean equals(Object o) {
