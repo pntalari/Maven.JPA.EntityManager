@@ -12,6 +12,17 @@ public class ArtistEntity {
     private String lastName;
     private String instrument;
 
+    public ArtistEntity() {
+    }
+
+    public ArtistEntity(int id, String firstName, String lastName, String instrument, Set<CdEntity> cDs) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.instrument = instrument;
+        this.cDs = cDs;
+    }
+
     @Id
     @Column(name = "id")
     public int getId() {
@@ -55,8 +66,8 @@ public class ArtistEntity {
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "ArtistCdEntity",
     joinColumns = @JoinColumn(name = "id", referencedColumnName = "id"),
-    inverseJoinColumns = @JoinColumn(name = "cd_id", referencedColumnName = "cd_id"))
-    private Set<CdEntity> cDs = new HashSet<CdEntity>();
+    inverseJoinColumns = @JoinColumn(name = "cdId", referencedColumnName = "id"))
+    private Set<CdEntity> cDs = new HashSet<>();
 
     @Override
     public boolean equals(Object o) {

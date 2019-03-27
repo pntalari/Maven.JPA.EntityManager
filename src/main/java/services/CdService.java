@@ -14,10 +14,24 @@ public class CdService {
     EntityManager entityManager = emf.createEntityManager();
     EntityTransaction entityTransaction = entityManager.getTransaction();
 
-    public void createCD(int id, Set<ArtistEntity> artist, String description,
-                         float price,String title, int year){
+    public CdEntity createCD(int id, String description,
+                         float price,String title, int year,Set<ArtistEntity> artists){
+        {
+            CdEntity cdEntity = new CdEntity();
 
+            cdEntity.setId(id);
+            cdEntity.setDesc(description);
+            cdEntity.setPrice(price);
+            cdEntity.setTitle(title);
+            cdEntity.setArtists(artists);
 
+            entityTransaction.begin();
+            entityManager.persist(cdEntity);
+            entityTransaction.commit();
+
+            return cdEntity;
+
+        }
     }
 
 }

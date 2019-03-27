@@ -8,21 +8,33 @@ import java.util.Set;
 @Entity
 @Table(name = "cd", schema = "jpaManager", catalog = "")
 public class CdEntity {
-    private int cd_id;
+    private int id;
     private String title;
     private String desc;
     private Integer year;
-    private Integer artist;
-    private Integer price;
+    private Float price;
+
+    public CdEntity() {
+
+    }
+
+    public CdEntity(int id, String title, String desc, Integer year, Float price, Set<ArtistEntity> artists) {
+        this.id = id;
+        this.title = title;
+        this.desc = desc;
+        this.year = year;
+        this.price = price;
+        this.artists = artists;
+    }
 
     @Id
     @Column(name = "id")
     public int getId() {
-        return cd_id;
+        return id;
     }
 
-    public void setId(int id) {
-        this.cd_id = id;
+    public void setId(int cd_id) {
+        this.id = cd_id;
     }
 
     @Basic
@@ -56,22 +68,12 @@ public class CdEntity {
     }
 
     @Basic
-    @Column(name = "artist")
-    public Integer getArtist() {
-        return artist;
-    }
-
-    public void setArtist(Integer artist) {
-        this.artist = artist;
-    }
-
-    @Basic
     @Column(name = "price")
-    public Integer getPrice() {
+    public Float getPrice() {
         return price;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(Float price) {
         this.price = price;
     }
 
@@ -84,7 +86,7 @@ public class CdEntity {
     }
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Set<ArtistEntity> artists = new HashSet<ArtistEntity>();
+    private Set<ArtistEntity> artists = new HashSet<>();
 
     @Override
     public boolean equals(Object o) {
@@ -93,11 +95,11 @@ public class CdEntity {
 
         CdEntity cdEntity = (CdEntity) o;
 
-        if (cd_id != cdEntity.cd_id) return false;
+        if (id != cdEntity.id) return false;
         if (title != null ? !title.equals(cdEntity.title) : cdEntity.title != null) return false;
         if (desc != null ? !desc.equals(cdEntity.desc) : cdEntity.desc != null) return false;
         if (year != null ? !year.equals(cdEntity.year) : cdEntity.year != null) return false;
-        if (artist != null ? !artist.equals(cdEntity.artist) : cdEntity.artist != null) return false;
+        if (artists != null ? !artists.equals(cdEntity.artists) : cdEntity.artists != null) return false;
         if (price != null ? !price.equals(cdEntity.price) : cdEntity.price != null) return false;
 
         return true;
@@ -105,11 +107,11 @@ public class CdEntity {
 
     @Override
     public int hashCode() {
-        int result = cd_id;
+        int result = id;
         result = 31 * result + (title != null ? title.hashCode() : 0);
         result = 31 * result + (desc != null ? desc.hashCode() : 0);
         result = 31 * result + (year != null ? year.hashCode() : 0);
-        result = 31 * result + (artist != null ? artist.hashCode() : 0);
+        result = 31 * result + (artists != null ? artists.hashCode() : 0);
         result = 31 * result + (price != null ? price.hashCode() : 0);
         return result;
     }

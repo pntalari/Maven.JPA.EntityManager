@@ -1,9 +1,9 @@
 import entities.ArtistEntity;
+import entities.CdEntity;
 import services.ArtistService;
+import services.CdService;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.TimeZone;
+import java.util.*;
 
 public class MainRunner {
     public static void main(String... args) {
@@ -19,15 +19,15 @@ public class MainRunner {
 //         System.out.println("Artist Persisted: " + artistEntity.getId());
 
         /** find artist by Id **/
-        artistEntity = artistService.findArtistById(2);
-        System.out.println("Finding Artist: " + artistEntity);
+      //  artistEntity = artistService.findArtistById(2);
+      //  System.out.println("Finding Artist: " + artistEntity);
 
         /** Update artist **/
 //        artistEntity = artistService.updateArtistInstrument(artistEntity,"Jazz");
 //        System.out.println("Artist Updated: " +artistEntity);
 
         /** delete artist **/
-        artistService.deleteArtist(artistEntity);
+     //   artistService.deleteArtist(artistEntity);
 
         /** find all artists **/
         List<ArtistEntity> artistList = new ArrayList<ArtistEntity>();
@@ -38,7 +38,14 @@ public class MainRunner {
         }
 
         /** CD Entity Service **/
+        CdService cdService = new CdService();
+        CdEntity cd;
 
+        Set<ArtistEntity> artistsSet = new HashSet<ArtistEntity>(artistList);
+        cd = cdService.createCD(1, "Desert Rose", 150, "Rose", 2000, artistsSet);
+        for (int i = 0; i < artistsSet.size(); i++) {
+            System.out.println(cd);
+        }
 
     }
 }
