@@ -9,12 +9,17 @@ public class MainRunner {
     public static void main(String... args) {
 
         /** Artist Entity service **/
-   //     ArtistService artistService = new ArtistService();
+        ArtistService artistService = new ArtistService();
+        ArtistEntity artistEntity = new ArtistEntity();
+        Set<ArtistEntity> artistSet1 = new HashSet<>();
 
-     //   ArtistEntity artistEntity = new ArtistEntity();
+
         /**Create Artist**/
 //         artistEntity = artistService.createArtist(6,"Elton", "John","Piano");
 //         artistService.createArtist(2,"Britney", "Spears","Base");
+
+        artistSet1.add(new ArtistEntity(8, "Joe", "Arnone", "Keyboard"));
+        artistSet1.add(new ArtistEntity(9, "Jidh", "Mohan", "Chelo"));
 //
 //         System.out.println("Artist Persisted: " + artistEntity.getId());
 
@@ -38,14 +43,12 @@ public class MainRunner {
 //        }
 
         /** CD Entity Service **/
-//        CdService cdService = new CdService();
-//        CdEntity cd;
-//
-//        Set<ArtistEntity> artistsSet = new HashSet<ArtistEntity>(artistList);
-//        cd = cdService.createCD(1, "Desert Rose", 150, "Rose", 2000, artistsSet);
-//        for (int i = 0; i < artistsSet.size(); i++) {
-//            System.out.println(cd);
-//        }
+        CdService cdService = new CdService();
+        CdEntity cds = new CdEntity();
+        //cdService.createCD(8, "Desert Rose", 150, "Rose", 2000,artistSet1);
+
+        cds = cdService.findCdById(1);
+        System.out.println("Finding CD: " +cds);
 
     }
 }
