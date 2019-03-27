@@ -28,7 +28,7 @@ public class ArtistServiceTest {
     @Test
     public void findArtistById() {
         //Given
-        int expectedId = 5;
+        Long expectedId = 5L;
         String expectedFName = "Jagan";
         String expectedLName = "Mohan";
         //When
@@ -42,7 +42,7 @@ public class ArtistServiceTest {
     @Test
     public void createArtist() {
         //Given
-        int id = 5;
+        Long id = 5L;
         String fName = "Jagan";
         String lName = "Mohan";
         String instrument = "Flute";
@@ -50,7 +50,7 @@ public class ArtistServiceTest {
         ArtistEntity artist = artistService.createArtist(id, fName, lName, instrument);
         //Then
         ArtistEntity actualArtist = artistService.findArtistById(id);
-        int actualID = actualArtist.getId();
+        Long actualID = actualArtist.getId();
         String actualFName = actualArtist.getFirstName();
 
         Assert.assertEquals(id, actualID);
@@ -73,7 +73,7 @@ public class ArtistServiceTest {
     @Test
     public void updateArtistInstrument() {
         //Given
-        ArtistEntity artist = artistService.findArtistById(2);
+        ArtistEntity artist = artistService.findArtistById(2L);
         String updatedInstrument = "Dance";
         //When
         artist = artistService.updateArtistInstrument(artist, updatedInstrument);
@@ -85,7 +85,7 @@ public class ArtistServiceTest {
     @Test
     public void deleteArtist() {
         //Given
-        int toDeleteId = 5;
+        Long toDeleteId = 5L;
         ArtistEntity artist = artistService.findArtistById(toDeleteId);
         //When
         artistService.deleteArtist(artist);

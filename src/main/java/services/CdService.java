@@ -11,14 +11,13 @@ public class CdService {
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpa-Entity");
     EntityManager entityManager = emf.createEntityManager();
     EntityTransaction entityTransaction = entityManager.getTransaction();
-
+    
     /** Create CD **/
-    public CdEntity createCD(int id, String description,
+    public CdEntity createCD(String description,
                          float price,String title, int year,Set<ArtistEntity> artists){
 
             CdEntity cdEntity = new CdEntity();
 
-            cdEntity.setId(id);
             cdEntity.setDescription(description);
             cdEntity.setPrice(price);
             cdEntity.setTitle(title);

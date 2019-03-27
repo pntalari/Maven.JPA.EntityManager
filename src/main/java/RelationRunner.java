@@ -20,12 +20,11 @@ public class RelationRunner {
         Set<ArtistEntity> artistEntitySet1 = new HashSet<>();
         Set<ArtistEntity> artistEntitySet2 = new HashSet<>();
 
-        artistEntitySet1.add(new ArtistEntity(8, "Joe", "Arnone", "Keyboard"));
-        artistEntitySet1.add(new ArtistEntity(10, "Jidh", "Mohan", "Chelo"));
-        artistEntitySet2.add(new ArtistEntity(9, "Sal", "Giafaglone", "Xailophone"));
-        artistEntitySet2.add(new ArtistEntity(11, "Lucas", "Turpin", "Saxophone"));
+        artistEntitySet1.add(new ArtistEntity( "Jidh", "Mohan", "Chelo"));
+        artistEntitySet2.add(new ArtistEntity( "Sal", "Giafaglone", "Xailophone"));
+        artistEntitySet2.add(new ArtistEntity("Lucas", "Turpin", "Saxophone"));
 
-        CdEntity cd1 = cdService.createCD(7, "Pop Music", 100, "Pop", 2017, artistEntitySet2);
+        CdEntity cd1 = cdService.createCD("Pop Music", 100, "Pop", 2017, artistEntitySet2);
         //  CdEntity cd2 = cdService.createCD(2, "Fall Music", 150, "Fall", 2018, artistEntitySet2);
         //  CdEntity cd3 = cdService.createCD(3, "Winter Music", 150, "Winter", 2017, artistEntitySet1);
         //  CdEntity cd4 = cdService.createCD(4, "Summer Music", 150, "Summer", 2016, artistEntitySet2);

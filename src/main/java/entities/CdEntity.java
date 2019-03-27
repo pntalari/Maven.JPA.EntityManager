@@ -3,14 +3,17 @@ package entities;
 import javax.persistence.*;
 import java.security.AllPermission;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Table(name = "cd", schema = "jpaManager", catalog = "")
+@Table(name = "cd", schema = "jpaManager")
 public class CdEntity {
     @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
     @Column(name = "id")
-    private int id;
+    private Long id;
+
     @Basic
     @Column(name = "title")
     private String title;
@@ -28,8 +31,7 @@ public class CdEntity {
 
     }
 
-    public CdEntity(int id, String title, String desc, Integer year, Float price, Set<ArtistEntity> artists) {
-        this.id = id;
+    public CdEntity(String title, String desc, Integer year, Float price, Set<ArtistEntity> artists) {
         this.title = title;
         this.description = desc;
         this.year = year;
@@ -37,15 +39,15 @@ public class CdEntity {
         this.artists = artists;
     }
 
-    @ManyToMany(mappedBy = "cDs")
-    private Set<ArtistEntity> artists = new HashSet<>();
+    @ManyToMany(mappedBy = "cDs",cascade = CascadeType.ALL)
+    public Set<ArtistEntity> artists = new HashSet<>();
 
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int cd_id) {
+    public void setId(Long cd_id) {
         this.id = cd_id;
     }
 
@@ -85,35 +87,22 @@ public class CdEntity {
         this.artists = artists;
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         CdEntity cdEntity = (CdEntity) o;
-
-        if (id != cdEntity.id) return false;
-        if (title != null ? !title.equals(cdEntity.title) : cdEntity.title != null) return false;
-        if (description != null ? !description.equals(cdEntity.description) : cdEntity.description != null)
-            return false;
-        if (year != null ? !year.equals(cdEntity.year) : cdEntity.year != null) return false;
-        if (artists != null ? !artists.equals(cdEntity.artists) : cdEntity.artists != null) return false;
-        if (price != null ? !price.equals(cdEntity.price) : cdEntity.price != null) return false;
-
-        return true;
+        return Objects.equals(title, cdEntity.title) &&
+                Objects.equals(year, cdEntity.year) &&
+                Objects.equals(price, cdEntity.price) &&
+                Objects.equals(description, cdEntity.description);
     }
 
     @Override
     public int hashCode() {
-        int result = id;
-        result = 31 * result + (title != null ? title.hashCode() : 0);
-        result = 31 * result + (description != null ? description.hashCode() : 0);
-        result = 31 * result + (year != null ? year.hashCode() : 0);
-        result = 31 * result + (artists != null ? artists.hashCode() : 0);
-        result = 31 * result + (price != null ? price.hashCode() : 0);
-        return result;
+        return Objects.hash(title, year, price, description);
     }
-
 
     public String getDescription() {
         return description;

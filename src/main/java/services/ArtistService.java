@@ -10,7 +10,7 @@ public class ArtistService {
     private EntityManager entityManager = emf.createEntityManager();
     private EntityTransaction entityTransaction = entityManager.getTransaction();
 
-    public ArtistEntity createArtist(Integer id, String firstName, String lastName, String instrument){
+    public ArtistEntity createArtist(Long id, String firstName, String lastName, String instrument){
         ArtistEntity artistEntity = new ArtistEntity();
         artistEntity.setId(id);
         artistEntity.setFirstName(firstName);
@@ -24,7 +24,7 @@ public class ArtistService {
         return artistEntity;
     }
 
-    public ArtistEntity findArtistById(Integer id){
+    public ArtistEntity findArtistById(Long id){
         return entityManager.find(ArtistEntity.class,id);
     }
 
@@ -54,4 +54,9 @@ public class ArtistService {
     }
 
 
+    public void createArtist(ArtistEntity artistEntity) {
+        entityTransaction.begin();
+        entityManager.persist(artistEntity);
+        entityTransaction.commit();
+    }
 }
