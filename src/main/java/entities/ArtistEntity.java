@@ -11,7 +11,7 @@ import java.util.Set;
 public class ArtistEntity {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
     @Basic
@@ -44,7 +44,7 @@ public class ArtistEntity {
         this.cDs = cDs;
     }
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,targetEntity = CdEntity.class)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER,targetEntity = CdEntity.class)
     @JoinTable(name = "artist_cd",
             joinColumns = @JoinColumn(name = "artist_id"),
             inverseJoinColumns = @JoinColumn(name = "cd_id"))
